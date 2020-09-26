@@ -1,0 +1,43 @@
+# system files
+*.DS_Store
+*.ini
+*~
+~$*
+
+# text editors
+*.dms
+*.s[a-v][a-z]
+*.sw[a-p]
+*.vscode/*
+
+# preprocessing, object, assembly, prerequisites, debug
+*.[iosd]
+*.ii
+*.lo
+*.slo
+*.obj
+*.dSYM
+
+# precompiled headers
+*.[gp]ch
+
+# static libs
+*.a
+*.la
+*.lai
+*.lib
+
+# dynamic libs
+*.so
+*.dll
+*.dylib
+
+# executables
+*.out
+*.exe
+*.app
+
+# text files
+*.txt
+*.pdf
+*dump
