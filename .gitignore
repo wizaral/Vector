@@ -4,40 +4,65 @@
 *~
 ~$*
 
-# text editors
-*.dms
-*.s[a-v][a-z]
-*.sw[a-p]
-*.vscode/*
+# Prerequisites
+*.d
 
-# preprocessing, object, assembly, prerequisites, debug
-*.[iosd]
+# Preprocessing
+*.i
 *.ii
+
+# Object files
+*.elf
+*.ko
 *.lo
-*.slo
+*.o
 *.obj
-*.dSYM
+*.slo
 
-# precompiled headers
-*.[gp]ch
+# Precompiled Headers
+*.gch
+*.pch
 
-# static libs
+# Dynamic libraries
+*.dll
+*.dylib
+*.so
+*.so.*
+
+# Static libraries
 *.a
 *.la
 *.lai
 *.lib
+*.lo
 
-# dynamic libs
-*.so
-*.dll
-*.dylib
-
-# executables
-*.out
-*.exe
+# Executables
 *.app
+*.exe
+*.hex
+*.i*86
+*.out
+*.x86_64
+
+# Linker output
+*.exp
+*.ilk
+*.map
+
+# Debug files
+*.dSYM/
+*.idb
+*.pdb
+*.su
+
+# Visual Studio Code
+.history/
+.vscode/
+*.code-workspace
 
 # text files
-*.txt
 *.pdf
+*.txt
 *dump
+
+# current project
