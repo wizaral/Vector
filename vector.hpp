@@ -107,7 +107,7 @@ public:
     template <class... Args>
     constexpr reference emplace_back(Args &&...args);
 
-    // constexpr vector<T> &push_back(const_reference value);
+    constexpr vector<T> &push_back(const_reference value);
     constexpr vector<T> &push_back(rvalue_reference value);
     constexpr vector<T> &pop_back();
 
@@ -117,7 +117,7 @@ public:
     template <class It>
     constexpr iterator insert(const_iterator pos, It first, It last);
 
-    // constexpr iterator insert(const_iterator pos, const_reference value);
+    constexpr iterator insert(const_iterator pos, const_reference value);
     constexpr iterator insert(const_iterator pos, rvalue_reference value);
     constexpr iterator insert(const_iterator pos, size_type size, const_reference value);
     constexpr iterator insert(const_iterator pos, std::initializer_list<T> list);
@@ -495,16 +495,16 @@ constexpr typename vector<T>::reference vector<T>::emplace_back(Args &&...args) 
     return *this;
 }
 
-// template <class T>
-// constexpr vector<T> &vector<T>::push_back(const_reference value) {
-//     if (m_size == m_capacity) {
-//         realloc();
-//     }
-//     ::new (m_buffer + m_size) T(value);
-//     ++m_size;
+template <class T>
+constexpr vector<T> &vector<T>::push_back(const_reference value) {
+    if (m_size == m_capacity) {
+        realloc();
+    }
+    ::new (m_buffer + m_size) T(value);
+    ++m_size;
 
-//     return *this;
-// }
+    return *this;
+}
 
 template <class T>
 constexpr vector<T> &vector<T>::push_back(rvalue_reference value) {
@@ -557,20 +557,20 @@ constexpr typename vector<T>::iterator vector<T>::insert(const_iterator pos, It 
     return m_buffer + diff;
 }
 
-// template <class T>
-// constexpr typename vector<T>::iterator vector<T>::insert(const_iterator pos, const_reference value) {
-//     auto diff = std::distance(m_buffer, pos);
+template <class T>
+constexpr typename vector<T>::iterator vector<T>::insert(const_iterator pos, const_reference value) {
+    auto diff = std::distance(m_buffer, pos);
 
-//     if (m_size == m_capacity) {
-//         realloc();
-//         pos = m_buffer + diff;
-//     }
-//     std::move_backward(pos, end(), end() + 1);
-//     ::new (pos) T(value);
+    if (m_size == m_capacity) {
+        realloc();
+        pos = m_buffer + diff;
+    }
+    std::move_backward(pos, end(), end() + 1);
+    ::new (pos) T(value);
 
-//     ++m_size;
-//     return m_buffer + diff;
-// }
+    ++m_size;
+    return m_buffer + diff;
+}
 
 template <class T>
 constexpr typename vector<T>::iterator vector<T>::insert(const_iterator pos, rvalue_reference value) {
