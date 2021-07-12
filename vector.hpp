@@ -32,7 +32,7 @@ private:
 
 public:
     constexpr vector() = default;
-    constexpr ~vector();
+    ~vector();
 
     template <class It>
     constexpr vector(It first, It last);
@@ -134,7 +134,7 @@ private:
 };
 
 template <class T>
-constexpr vector<T>::~vector() {
+vector<T>::~vector() {
     clear();
     std::free(m_buffer);
 }
@@ -645,7 +645,12 @@ constexpr typename vector<T>::iterator vector<T>::erase(const_iterator first, co
 
 template <class T>
 constexpr vector<T> &vector<T>::swap(vector<T> &v) noexcept {
-    std::swab(this, &v, sizeof(vector<T>));
+    uint8_t bytes[sizeof(vector<T>)];
+
+    memcpy(bytes, this, sizeof(vector<T>));
+    memcpy(this, &v, sizeof(vector<T>));
+    memcpy(&v, bytes, sizeof(vector<T>));
+
     return *this;
 }
 
