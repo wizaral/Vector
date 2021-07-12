@@ -230,10 +230,9 @@ constexpr vector<T> &vector<T>::operator=(std::initializer_list<T> list) {
 template <class T>
 template <class It>
 constexpr vector<T> &vector<T>::assign(It first, It last) {
-    clear();
     auto size = std::distance(first, last);
 
-    if (size > m_capacity) {
+    if (clear(); size > m_capacity) {
         realloc(size);
     }
 
@@ -256,10 +255,9 @@ constexpr vector<T> &vector<T>::assign(size_type size, const_reference value) {
 
 template <class T>
 constexpr vector<T> &vector<T>::assign(std::initializer_list<T> list) {
-    clear();
     auto size = list.size();
 
-    if (size > m_capacity) {
+    if (clear(); size > m_capacity) {
         realloc(size);
     }
 
@@ -382,14 +380,7 @@ constexpr typename vector<T>::size_type vector<T>::capacity() const noexcept {
 
 template <class T>
 constexpr vector<T> &vector<T>::resize(size_type size) {
-    if (size > m_size) {
-        reserve(size);
-        std::uninitialized_fill_n(end(), size - m_size, T{});
-        m_size = size;
-    } else if (size < m_size) {
-        erase(end() - size, end());
-    }
-    return *this;
+    return resize(size, T{});
 }
 
 template <class T>
