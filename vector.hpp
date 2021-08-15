@@ -125,7 +125,7 @@ public:
     constexpr iterator erase(const_iterator pos);
     constexpr iterator erase(const_iterator first, const_iterator last);
 
-    constexpr vector<T> &swap(vector<T> &v) noexcept;
+    constexpr vector<T> &swap(vector<T> &v);
     constexpr vector<T> &clear() noexcept;
 
 private:
@@ -662,7 +662,7 @@ constexpr vector<T> &vector<T>::clear() noexcept {
 }
 
 template <class T>
-constexpr typename vector<T>::pointer vector<T>::alloc(size_type size) noexcept {
+constexpr typename vector<T>::pointer vector<T>::alloc(size_type size) {
     auto res = static_cast<pointer>(std::malloc(size * sizeof(T)));
 
     if (res == nullptr) {
